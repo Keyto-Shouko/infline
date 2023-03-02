@@ -1,3 +1,3 @@
 <template>
-    <button>Coucou</button>
+    <button>Clique !</button>
 </template>
