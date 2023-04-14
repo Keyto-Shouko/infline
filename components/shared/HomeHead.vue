@@ -21,7 +21,7 @@
                 </button>
             </div>
             <div class="h-1/3 w-1/3 bg-contain z-10">
-                <img src="/assets/images/selfieGirl.png" alt="selfieGirlPlaceHolder" srcset="">
+                <img src="./assets/images/selfieGirl.png" alt="selfieGirlPlaceHolder" srcset="">
             </div>
         </div>
 

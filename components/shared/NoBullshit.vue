@@ -15,6 +15,7 @@
         <p class="font-bold">
             Une relation transparente
         </p>
+        <img src="/assets/images/ellipse.png" alt="line" srcset="" class="absolute ml-52">
         <p class="justify-evenly w-[37%] text-2xl mt-12">
             Pas de bullshit, pas de chichis. Chez Infline, la relation 
             entre influenceurs et marques est transparente. 
