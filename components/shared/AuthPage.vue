@@ -2,14 +2,40 @@
 </script>
 
 <script>
+import axios from 'axios';
 export default {
     props: {
         isRegister: {
             type: Boolean,
             default: false
         }
-    }
-}
+    },
+
+
+    data() {
+        return {
+            email: '',
+            password: '',
+        };
+    },
+    methods: {
+        async handleSubmit() {
+            const response = await axios.post('http://localhost:1337/auth/local', {
+                identifier: this.email,
+                password: this.password,
+            }, {
+                headers: {
+                    'content-Type': 'application/json',
+                },
+            })
+            if (response.data.jwt) {
+                alert('You are logged in!');
+            } else {
+                console.log(response.data.message);
+            }
+        },
+    },
+};
 </script>
 
 <template>
@@ -23,37 +49,34 @@ export default {
                 <h2 class="text-[30px] font-bold mb-8 font-integral">{{ isRegister ? 'S\'INSCRIRE' : 'SE CONNECTER' }}</h2>
                 <p v-if="!isRegister" class="mb-4">Si tu n’es pas encore inscrit,<br> Tu peux <span
                         class="text-purpleMDS"><a href="./register"> t’inscrire ici !</a></span></p>
-                <p v-else class="mb-4">Tu es déjà inscrit ? <br>Tu peux <span class="text-purpleMDS"><a href="./login">te connecter ici</a></span>
+                <p v-else class="mb-4">Tu es déjà inscrit ? <br>Tu peux <span class="text-purpleMDS"><a href="./login">te
+                            connecter ici</a></span>
                 </p>
-                <form class="mt-12">
+                <form class="mt-12" v-on:submit.prevent="handleSubmit">
                     <div class="mb-4 relative">
                         <label class="block text-greyTextMDS text-[13px]" for="email">
                             Email
                         </label>
                         <input class="bg-transparent w-[350px] py-2 px-3 border-b-black border-transparent" id="email"
-                            type="text" placeholder="Entre ton adresse e-mail" />
+                            type="text" placeholder="Entre ton adresse e-mail" v-model="email" />
                     </div>
                     <div class="mb-4">
                         <label class="block text-greyTextMDS text-[13px]" for="password">
                             Mot de passe
                         </label>
                         <input class=" w-full py-2 px-3 border-b-black border-transparent" id="password" type="password"
-                            placeholder="Entre ton mot de passe" />
+                            placeholder="Entre ton mot de passe" v-model="password" />
                     </div>
                     <div v-if="isRegister" class="mb-4">
-            <label class="block text-greyTextMDS text-[13px]" for="confirmPassword">
-              Confirmer le mot de passe
-            </label>
-            <input
-              class="w-full py-2 px-3 border-b-black border-transparent"
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirme ton mot de passe"
-            />
-          </div>
+                        <label class="block text-greyTextMDS text-[13px]" for="confirmPassword">
+                            Confirmer le mot de passe
+                        </label>
+                        <input class="w-full py-2 px-3 border-b-black border-transparent" id="confirmPassword"
+                            type="password" placeholder="Confirme ton mot de passe" />
+                    </div>
                     <div class="flex items-center justify-between mt-8">
                         <button class="bg-purpleMDS text-white font-bold py-3 px-12 rounded-lg font-integral text-[12px]"
-                            type="button">
+                            type="submit" action="#">
                             {{ isRegister ? 'S\'INSCRIRE' : 'SE CONNECTER' }}
                         </button>
                     </div>

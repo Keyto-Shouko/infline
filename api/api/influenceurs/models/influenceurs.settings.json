@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "influenceurs",
+  "info": {
+    "name": "influenceurs",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nom": {
+      "type": "string"
+    },
+    "Prenom": {
+      "type": "string"
+    },
+    "Abonnes": {
+      "type": "biginteger"
+    },
+    "Pseudo": {
+      "type": "string"
+    }
+  }
+}

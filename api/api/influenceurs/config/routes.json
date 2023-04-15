@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/influenceurs",
+      "handler": "influenceurs.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/influenceurs/count",
+      "handler": "influenceurs.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/influenceurs/:id",
+      "handler": "influenceurs.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/influenceurs",
+      "handler": "influenceurs.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/influenceurs/:id",
+      "handler": "influenceurs.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/influenceurs/:id",
+      "handler": "influenceurs.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
