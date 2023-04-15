@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="flex flex-col justify-items-center flex-wrap text-center mt-32">
+    <div class="flex flex-col justify-items-center flex-wrap text-center mt-32 mb-24">
         <p class="font-bold text-[32px] leading-[48px] mb-24">
             Les domaines qu'on couvre.
         </p>

@@ -12,16 +12,20 @@
                     LA PLATEFORME N°1 POUR TROUVER UN
                     <span class="outlined text-black text-5xl w-1">INFLUENCEUR</span>
                 </p>
-                
+
                 <button class="font-integral text-black rounded-lg bg-white p-4 mt-11 mr-11">
-                    JE SUIS INFLUENCEUR
+                    <a href="./login">
+                        JE SUIS INFLUENCEUR
+                    </a>
                 </button>
                 <button class="font-integral text-white rounded-lg bg-purpleMDS p-4">
-                    JE SUIS UNE MARQUE
+                    <a href="./login">
+                        JE SUIS UNE MARQUE
+                    </a>
                 </button>
             </div>
             <div class="h-1/3 w-1/3 bg-contain z-10">
-                <img src="./assets/images/selfieGirl.png" alt="selfieGirlPlaceHolder" srcset="">
+                <img src="/assets/images/selfieGirl.png" alt="selfieGirlPlaceHolder" srcset="">
             </div>
         </div>
 

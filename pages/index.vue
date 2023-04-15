@@ -5,5 +5,8 @@
         <SharedNoBullshit/>
         <SharedBlackSeparation/>
         <SharedDomains/>
+        <SharedJerome/>
+        <SharedNews/>
+        <SharedBottomLayer/>
     </div>
 </template>

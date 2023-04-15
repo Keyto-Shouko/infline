@@ -1,3 +1,3 @@
 <template>
-    register
+    <SharedAuthPage isRegister />
 </template>
