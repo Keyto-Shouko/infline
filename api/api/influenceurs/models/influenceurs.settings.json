@@ -23,6 +23,9 @@
     },
     "Pseudo": {
       "type": "string"
+    },
+    "address": {
+      "type": "string"
     }
   }
 }

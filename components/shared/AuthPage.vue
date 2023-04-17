@@ -3,6 +3,12 @@
 
 <script>
 import axios from 'axios';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { createStore } from 'vuex'
+import { mapActions } from 'vuex'
+  
 export default {
     props: {
         isRegister: {
@@ -10,13 +16,18 @@ export default {
             default: false
         }
     },
-
-
+    components: {
+    FontAwesomeIcon
+  },
+  
     data() {
         return {
             email: '',
             password: '',
         };
+    },
+    mounted() {
+        library.add(faEnvelope,faLock)
     },
     methods: {
         async handleSubmit() {
@@ -29,7 +40,8 @@ export default {
                 },
             })
             if (response.data.jwt) {
-                alert('You are logged in!');
+                localStorage.setItem('jwt', response.data.jwt)
+                this.$router.push('/map');
             } else {
                 console.log(response.data.message);
             }
@@ -54,11 +66,13 @@ export default {
                 </p>
                 <form class="mt-12" v-on:submit.prevent="handleSubmit">
                     <div class="mb-4 relative">
+                        
                         <label class="block text-greyTextMDS text-[13px]" for="email">
                             Email
                         </label>
                         <input class="bg-transparent w-[350px] py-2 px-3 border-b-black border-transparent" id="email"
                             type="text" placeholder="Entre ton adresse e-mail" v-model="email" />
+                            <!--<font-awesome-icon icon="fa-solid fa-envelope" class="absolute top-8 left-[-14px]"/>-->
                     </div>
                     <div class="mb-4">
                         <label class="block text-greyTextMDS text-[13px]" for="password">
@@ -66,6 +80,7 @@ export default {
                         </label>
                         <input class=" w-full py-2 px-3 border-b-black border-transparent" id="password" type="password"
                             placeholder="Entre ton mot de passe" v-model="password" />
+                            <!--<font-awesome-icon icon="fa-solid fa-lock" class="absolute top-8 left-[-14px]"/>-->
                     </div>
                     <div v-if="isRegister" class="mb-4">
                         <label class="block text-greyTextMDS text-[13px]" for="confirmPassword">
@@ -89,8 +104,10 @@ export default {
                 </form>
             </div>
         </div>
-        <div class="w-1/2 bg-black flex items-center justify-center rounded-lg mt-4 mb-4 mr-4">
-            <img src="/assets/images/eggSelfieGirl.png" alt="Image" class="w-2/5 max-w-xl" />
+        <div class="w-1/2 bg-black flex flex-col items-center justify-center rounded-lg mt-4 mb-4 mr-4">
+            <img src="/assets/images/eggSelfieGirl.png" alt="Image" class="w-2/5 max-w-xl h-[60%] mt-12" />
+            <p class="text-white font-semibold text-[40px] mt-10">Rejoins la communauté</p>
+            <p class="text-[20px] font-light text-white">Et sois mis en relation en 15 secondes.</p>
         </div>
     </div>
 </template>

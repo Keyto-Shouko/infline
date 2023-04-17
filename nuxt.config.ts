@@ -9,7 +9,8 @@ export default defineNuxtConfig({
       plugins: [
         require('@tailwindcss/forms')
       ],
-      content: []
-    }
+      content: [],
+    },
   }
+
 }) 
