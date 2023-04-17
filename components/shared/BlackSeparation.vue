@@ -34,11 +34,11 @@ export default {
             </div>
             <div class="ml-[25%] flex justify-between max-w-[75%]">
                 <div class="flex-row w-[60%] mt-[6%] ml-[-2%]">
-                    <p class="font-integral text-white text-5xl mt-36 z-50 text-center">
+                    <p class="font-integral text-white text-5xl mt-36 z-50 text-center relative">
                         DÉJA PLUS DE
                     </p>
-                    <p class="font-integral text-purpleMDS text-5xl z-50 text-center">
-                        250 COLLABORATEURS
+                    <p class="font-integral text-purpleMDS text-5xl z-50 text-center relative">
+                        250 COLLABORATIONS
                     </p>
                 </div>
             </div>

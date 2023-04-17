@@ -38,5 +38,15 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
+## Launch Strapi
 
+Make sure to be on the correct folder : 
+```bash
+cd api
+```
+
+Then run the server : 
+```bash
+npm run develop
+```
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
