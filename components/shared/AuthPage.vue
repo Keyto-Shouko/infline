@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { createStore } from 'vuex'
 import { mapActions } from 'vuex'
-  
+
 export default {
     props: {
         isRegister: {
@@ -17,33 +17,57 @@ export default {
         }
     },
     components: {
-    FontAwesomeIcon
-  },
-  
+        FontAwesomeIcon
+    },
+
     data() {
         return {
             email: '',
             password: '',
+            username: '',
         };
     },
     mounted() {
-        library.add(faEnvelope,faLock)
+        library.add(faEnvelope, faLock)
     },
     methods: {
         async handleSubmit() {
-            const response = await axios.post('http://localhost:1337/auth/local', {
-                identifier: this.email,
-                password: this.password,
-            }, {
-                headers: {
-                    'content-Type': 'application/json',
-                },
-            })
-            if (response.data.jwt) {
-                localStorage.setItem('jwt', response.data.jwt)
-                this.$router.push('/map');
+            if (!this.isRegister) {
+                const response = await axios.post('http://localhost:1337/auth/local', {
+                    identifier: this.email,
+                    password: this.password,
+                }, {
+                    headers: {
+                        'content-Type': 'application/json',
+                    },
+                })
+                if (response.data.jwt) {
+                    const userDetails = await axios.get('http://localhost:1337/users/me', {
+                        headers: {
+                            Authorization:
+                                'Bearer ' + response.data.jwt,
+                        },
+                    })
+                    localStorage.setItem('jwt', response.data.jwt)
+                    localStorage.setItem('user', JSON.stringify(userDetails.data))
+                    this.$router.push('/map');
+                } else {
+                    console.log(response.data.message);
+                }
             } else {
-                console.log(response.data.message);
+                await axios.post('http://localhost:1337/auth/local/register', {
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                })
+                    .then(response => {
+                        localStorage.setItem('user', JSON.stringify(response.data.user));
+                        localStorage.setItem('jwt', response.data.jwt);
+                        this.$router.push('/map');
+                    })
+                    .catch(error => {
+                        console.log('An error occurred:', error.response);
+                    });
             }
         },
     },
@@ -66,13 +90,19 @@ export default {
                 </p>
                 <form class="mt-12" v-on:submit.prevent="handleSubmit">
                     <div class="mb-4 relative">
-                        
                         <label class="block text-greyTextMDS text-[13px]" for="email">
                             Email
                         </label>
                         <input class="bg-transparent w-[350px] py-2 px-3 border-b-black border-transparent" id="email"
                             type="text" placeholder="Entre ton adresse e-mail" v-model="email" />
-                            <!--<font-awesome-icon icon="fa-solid fa-envelope" class="absolute top-8 left-[-14px]"/>-->
+                        <!--<font-awesome-icon icon="fa-solid fa-envelope" class="absolute top-8 left-[-14px]"/>-->
+                    </div>
+                    <div v-if="isRegister" class="mb-4">
+                        <label class="block text-greyTextMDS text-[13px]" for="username">
+                            Nom d'utilisateur
+                        </label>
+                        <input class="w-full py-2 px-3 border-b-black border-transparent" id="username"
+                            type="text" placeholder="Entre ton nom d'utilisateur" v-model="username"/>
                     </div>
                     <div class="mb-4">
                         <label class="block text-greyTextMDS text-[13px]" for="password">
@@ -80,7 +110,7 @@ export default {
                         </label>
                         <input class=" w-full py-2 px-3 border-b-black border-transparent" id="password" type="password"
                             placeholder="Entre ton mot de passe" v-model="password" />
-                            <!--<font-awesome-icon icon="fa-solid fa-lock" class="absolute top-8 left-[-14px]"/>-->
+                        <!--<font-awesome-icon icon="fa-solid fa-lock" class="absolute top-8 left-[-14px]"/>-->
                     </div>
                     <div v-if="isRegister" class="mb-4">
                         <label class="block text-greyTextMDS text-[13px]" for="confirmPassword">
